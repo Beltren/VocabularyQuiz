@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Quiz Results</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Your Answer</th>
+                    <th>Correct Answer</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% results.forEach(result => { %>
+                <tr>
+                    <td><%= result.word.Word %></td>
+                    <td><%= result.userAnswer %></td>
+                    <td><%= result.correctAnswer %></td>
+                    <td class="<%= result.isCorrect ? 'table-success' : 'table-danger' %>">
+                        <%= result.isCorrect ? 'Correct' : 'Incorrect' %>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary">Start Over</a>
+    </div>
+</body>
+</html>

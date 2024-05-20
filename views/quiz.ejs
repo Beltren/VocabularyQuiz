@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Quiz</h1>
+        <% if (typeof result !== 'undefined') { %>
+            <div class="alert alert-<%= result.isCorrect ? 'success' : 'danger' %>" role="alert">
+                <% if (result.isCorrect) { %>
+                    Correct!
+                <% } else { %>
+                    Incorrect! The correct answer was <%= result.correctAnswer %>.
+                <% } %>
+            </div>
+        <% } %>
+        <form action="/quiz" method="POST">
+            <div class="form-group">
+                <label for="userAnswer">Translate "<%= word.Word %>"</label>
+                <input type="text" class="form-control" id="userAnswer" name="userAnswer" autofocus autocomplete="off" required value="">
+                <input type="hidden" name="word" value='<%= JSON.stringify(word) %>'>
+                <% if (word.Speak) { %>
+                    <input type="hidden" name="speak" value="<%= word.Speak %>">
+                <% } %>
+                <% if (word.Slang) { %>
+                    <input type="hidden" name="slang" value="<%= word.Slang %>">
+                <% } %>
+                <% if (word.Written) { %>
+                    <input type="hidden" name="written" value="<%= word.Written %>">
+                <% } %>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <form action="/results" method="GET">
+            <button type="submit" class="btn btn-info mt-3">Finish Quiz</button>
+        </form>
+    </div>
+</body>
+</html>
